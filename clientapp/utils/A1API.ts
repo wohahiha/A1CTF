@@ -2713,6 +2713,28 @@ export class Api<
       }),
 
     /**
+     * @description Delete a game
+     *
+     * @tags admin
+     * @name DeleteGame
+     * @summary Delete a game
+     * @request DELETE:/api/admin/game/{game_id}
+     */
+    deleteGame: (gameId: number, params: RequestParams = {}) =>
+      this.request<
+        {
+          code: number;
+          message: string;
+        },
+        void | ErrorMessage
+      >({
+        path: `/api/admin/game/${gameId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Update a game
      *
      * @tags admin

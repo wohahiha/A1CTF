@@ -19,7 +19,7 @@ export function AdminGameManagePage() {
     const [searchContent, setSearchContent] = useState("")
 
     // TODO 前后端适配分页
-    const { data: games = [], isLoading } = useSWR<UserGameSimpleInfo[]>(
+    const { data: games = [], isLoading, mutate: refreshGameList } = useSWR<UserGameSimpleInfo[]>(
         "/admin/games/list",
         () => api.admin.listGames({ size: 1024, offset: 0 }).then(res => res.data.data)
     )
@@ -77,7 +77,7 @@ export function AdminGameManagePage() {
                         <div className="p-6">
                             <div className={`grid gap-6 ${filteredGames.length > 2 ? "grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3" : "grid-cols-1 lg:grid-cols-2"}`}>
                                 {filteredGames.map((game, index) => (
-                                    <GameCard game={game} key={index} />
+                                    <GameCard game={game} key={index} refreshGameList={refreshGameList} />
                                 ))}
                             </div>
                         </div>

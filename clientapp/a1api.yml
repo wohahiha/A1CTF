@@ -625,6 +625,41 @@ paths:
           description: The ID of the game to retrieve
           schema:
             type: integer
+    delete:
+      tags: [admin]
+      operationId: deleteGame
+      summary: Delete a game
+      description: Delete a game
+      responses:
+        '200':
+          description: Game deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                required:
+                  - code
+                  - message
+        '400':
+          description: Bad request
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      parameters:
+        - name: game_id
+          in: path
+          required: true
+          description: The ID of the game to retrieve
+          schema:
+            type: integer
     put:
       tags: [admin]
       operationId: updateGame

@@ -383,6 +383,7 @@ func main() {
 
 			gameGroup.GET("/:game_id", controllers.PathParmsMiddlewareBuilder("G"), controllers.AdminGetGame)
 			gameGroup.PUT("/:game_id", controllers.PathParmsMiddlewareBuilder("G"), controllers.AdminUpdateGame)
+			gameGroup.DELETE("/:game_id", controllers.PathParmsMiddlewareBuilder("G"), controllers.AdminDeleteGame)
 
 			// gamechallenges 操作接口
 			gameGroup.GET("/:game_id/challenge/:challenge_id", controllers.PathParmsMiddlewareBuilder("GC[Challenge]"), controllers.AdminGetGameChallenge)
