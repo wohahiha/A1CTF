@@ -272,6 +272,23 @@ func AdminGetGameChallenge(c *gin.Context) {
 	})
 }
 
+func AdminDeleteGame(c *gin.Context) {
+	game := c.MustGet("game").(models.Game)
+
+	if err := dbtool.DB().Delete(&game).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"code":    500,
+			"message": i18ntool.Translate(c, &i18n.LocalizeConfig{MessageID: "FailedToDeleteGame"}),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":    200,
+		"message": i18ntool.Translate(c, &i18n.LocalizeConfig{MessageID: "GameDeletedSuccessfully"}),
+	})
+}
+
 func AdminUpdateGameChallenge(c *gin.Context) {
 
 	gameID := c.MustGet("game_id").(int64)
